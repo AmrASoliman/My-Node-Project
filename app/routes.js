@@ -54,7 +54,17 @@ module.exports = function(app, passport) {
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
             user : req.user // get the user out of session and pass to template
+
         });
+    });
+
+    app.post('/profile', function(req,res){
+        
+     var user =  req.user
+     user.name= req.body.username
+     user.job=req.body.userjob
+     user.save()
+
     });
 
     // =====================================

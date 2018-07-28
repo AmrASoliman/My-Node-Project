@@ -22,7 +22,12 @@
         <div class="col-sm-6">
             <div class="well">
                 <h3><span class="fa fa-user"></span> Local</h3>
-
+                <form method="POST">
+                        <label for="name">Name:</label>
+                        <input type="text" name="username" id="name" value="<%= user.name %>"   ><br>
+                        <label for="job">Job:</label>
+                        <input type="text" name="userjob" id="job" value= "<%= user.job %>"  ><br>
+                        <button type="submit" class="btn btn-warning btn-lg">Update Portfolio</button>
                     <p>
                         <strong>id</strong>: <%= user._id %><br>
                         <strong>email</strong>: <%= user.local.email %><br>
