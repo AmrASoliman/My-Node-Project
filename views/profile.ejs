@@ -3,42 +3,52 @@
 <html>
 <head>
     <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body        { padding-top:80px; word-wrap:break-word; }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<div >
 
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Profile Page</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
-    <div class="row">
+    <div class="jumbotron">
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
+        <div class="container-fluid">
             <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+                <h3><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Local</h3>
                 <form method="POST">
-                        <label for="name">Name:</label>
-                        <input type="text" name="username" id="name" value="<%= user.name %>"   ><br>
-                        <label for="job">Job:</label>
-                        <input type="text" name="userjob" id="job" value= "<%= user.job %>"  ><br>
-                        <button type="submit" class="btn btn-warning btn-lg">Update Portfolio</button>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
+                        <input class="form-control" type="text" name="username" id="name" value="<%= user.name %>" placeholder="User Full Name"><br>
+                        <input class="form-control" type="text" name="userjob" id="job" value= "<%= user.job %>" placeholder="Job title"><br>
+                        <button type="submit" class="btn btn-outline-dark">Update</button>
+                </form> 
+                <form id="fileForm" enctype="multipart/form-data" action="/fileUpload" method='POST' >
+
+                    <input type="file" id="userFile" name="userFile"> 
+                
+                    <button type="submit" class="btn btn-warning"  value="Upload">Upload</button>
+                
+                </form> 
+                <br>      
+                <p>
+                    <strong>id</strong>: <%= user._id %><br>
+                    <strong>email</strong>: <%= user.local.email %><br>
+                    <strong>password</strong>: <%= user.local.password %>
+                </p>
+                <img src="data: <%= user.mimetype %>;base64, <%= user.PhotoData %> ">
+                
 
             </div>
-        </div>
+        </div>f
 
     </div>
 
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -8,7 +8,8 @@ var bcrypt   = require('bcrypt-nodejs');
 var userSchema = mongoose.Schema({
     name: String,
     job: String,
-    image: Buffer,
+    photo: Buffer,
+    mimetype: String,
 
     local            : {
         email        : String,
@@ -45,6 +46,14 @@ userSchema.methods.generateHash = function(password) {
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
+
+userSchema.virtual('PhotoData').get(function () {
+    if (this.photo){
+        return  this.photo.toString('base64');
+    };
+
+
+  });
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

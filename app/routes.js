@@ -1,6 +1,14 @@
 // app/routes.js
 module.exports = function(app, passport) {
 
+    var multer = require('multer');
+    var uploadService = multer({storage: multer.memoryStorage(), limits: {fileSize: 1000 * 1000 * 12}});
+      
+      
+
+
+
+
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -17,6 +25,7 @@ module.exports = function(app, passport) {
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
     });
+
 
 
     // process the login form
@@ -73,6 +82,26 @@ module.exports = function(app, passport) {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+
+
+    //======================================
+    //upload file===========================
+    //======================================
+    app.post('/fileUpload', uploadService.single('userFile'),function(req, res)  {
+
+        var userFile = req.file;
+        var user=req.user;
+        user.photo =userFile.buffer;
+        user.mimetype=userFile.mimetype;
+        //user.job="Super man";
+        user.save(function (err, book) {
+            if (err) return console.error(err);
+            res.redirect('/profile');
+          });
+        
+     
+
     });
 
 
